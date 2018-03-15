@@ -185,14 +185,20 @@ public:
 		root = remove(x, root);
 	}
 
-	void display(ofstream &outfile)
+	void displayName(ofstream &outfile)
 	{
 		postorder(root, outfile);
+	}
+
+	void displayBday(ofstream &outfile)
+	{
+		/*https://www.geeksforgeeks.org/level-order-tree-traversal/*/
 	}
 
 	void search(T x)
 	{
 		root = find(root, x);
+		std::cout << root->data << " was found!" << endl << endl;
 	}
 
 	node* getRoot() const
