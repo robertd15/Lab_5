@@ -95,16 +95,30 @@ class BST
         node* temp;
         if (t == NULL)
             return NULL;
-        else if (x < t->data)
-            t->left = remove(x, t->left);
-        else if (x > t->data)
-            t->right = remove(x, t->right);
-        else if (t->left && t->right)
+        
+        else if (!isBirthday)
+        {
+            if (x < t->data)
+                t->left = remove(x, t->left);
+            else if (x > t->data)
+                t->right = remove(x, t->right);
+        }
+        
+        else if(isBirthday)
+        {
+            if (x.getBirthday() < t->data.getBirthday())
+                t->left = remove(x, t->left);
+            else if (x.getBirthday() > t->data.getBirthday())
+                t->right = remove(x, t->right);
+        }
+        
+        else if(t->left && t->right)
         {
             temp = findMin(t->right);
             t->data = temp->data;
             t->right = remove(t->data, t->right);
         }
+        
         else
         {
             temp = t;
@@ -116,6 +130,7 @@ class BST
         }
         
         return t;
+        
     }
     
     void inorder(node* t, ofstream &outfile)
@@ -214,6 +229,12 @@ public:
         root = remove(x, root);
     }
     
+    void modify(T x)
+    {
+        root = remove(x, root);
+        root = insert(x, root);
+    }
+    
     void displayName(ofstream &outfile)
     {
         postorder(root, outfile);
@@ -226,8 +247,11 @@ public:
     
     void search(T x)
     {
-        root = find(root, x);
-        std::cout << root->data << " was found!" << endl << endl;
+        node* found = find(root, x);
+        if(found == NULL)
+            std::cout << "Data was not found" << std::endl << std::endl;
+        else
+            std::cout << root->data << " was found!" << endl << endl;
     }
     
     node* getRoot() const

@@ -35,10 +35,10 @@ int main()
     char inloop = 'Y';
     
     //Name tree object
-    BST<Person> nameSearchTree;
+    BST<Person> nameSearchTree(false);
     
     //Birthday tree object
-    BST<Person> bdaySearchTree;
+    BST<Person> bdaySearchTree(true);
     
     //Variables for file streams
     ifstream infile;
@@ -157,13 +157,14 @@ int main()
             cout << "1. Add" << endl << endl;
             cout << "2. Delete" << endl << endl;
             cout << "3. Search" << endl << endl;
-            cout << "4. Exit" << endl << endl;
+            cout << "4. Modify" << endl << endl;
+            cout << "5. Exit" << endl << endl;
             
             cin >> mainmenuchoice;
             cin.ignore();
             cout << endl << endl;
             
-            while (mainmenuchoice < 1 || mainmenuchoice > 4)
+            while (mainmenuchoice < 1 || mainmenuchoice > 5)
             {
                 cout << "One of the following options was not chosen" << endl << endl;
                 cout << "Please enter a valid menu choice 1-4" << endl << endl;
@@ -245,8 +246,55 @@ int main()
                 nameSearchTree.search(temporary);
             }
             
+            //Modify
+            else if(mainmenuchoice == 4)
+            {
+                
+                cout << "Enter the details of the entry to be modified" << endl << endl;
+                
+                cout << "Enter the first name" << endl << endl;
+                cin >> fnameholder;
+                cin.ignore();
+                cout << endl << endl;
+                
+                cout << "Enter the last name" << endl << endl;
+                cin >> lnameholder;
+                cin.ignore();
+                cout << endl << endl;
+                
+                cout << "Enter the birth date in the format yyyymmdd" << endl << endl;
+                cin >> birthdayholder;
+                cin.ignore();
+                cout << endl << endl;
+                
+                Person temporary(fnameholder, lnameholder, birthdayholder);
+                
+                nameSearchTree.remove(temporary);
+                
+                cout << "Now enter the new details of the Person being modified" << endl << endl;
+                
+                cout << "Enter the first name" << endl << endl;
+                cin >> fnameholder;
+                cin.ignore();
+                cout << endl << endl;
+                
+                cout << "Enter the last name" << endl << endl;
+                cin >> lnameholder;
+                cin.ignore();
+                cout << endl << endl;
+                
+                cout << "Enter the birth date in the format yyyymmdd" << endl << endl;
+                cin >> birthdayholder;
+                cin.ignore();
+                cout << endl << endl;
+                
+                nameSearchTree.insert(temporary);
+                
+                cout << temporary << " was modified!" << endl << endl;
+            }
+            
             //Exit
-            else if (mainmenuchoice == 4)
+            else if (mainmenuchoice == 5)
             {
                 inloop = false;
             }
@@ -260,13 +308,14 @@ int main()
             cout << "1. Add" << endl << endl;
             cout << "2. Delete" << endl << endl;
             cout << "3. Search" << endl << endl;
-            cout << "4. Exit" << endl << endl;
+            cout << "4. Modify" << endl << endl;
+            cout << "5. Exit" << endl << endl;
             
             cin >> mainmenuchoice;
             cin.ignore();
             cout << endl << endl;
             
-            while (mainmenuchoice < 1 || mainmenuchoice > 4)
+            while (mainmenuchoice < 1 || mainmenuchoice > 5)
             {
                 cout << "One of the following options was not chosen" << endl << endl;
                 cout << "Please enter a valid menu choice 1-4" << endl << endl;
@@ -348,8 +397,54 @@ int main()
                 bdaySearchTree.search(temporary);
             }
             
+            else if(mainmenuchoice == 4)
+            {
+                cout << "Enter the details of the entry to be modified" << endl << endl;
+                
+                cout << "Enter the first name" << endl << endl;
+                cin >> fnameholder;
+                cin.ignore();
+                cout << endl << endl;
+                
+                cout << "Enter the last name" << endl << endl;
+                cin >> lnameholder;
+                cin.ignore();
+                cout << endl << endl;
+                
+                cout << "Enter the birth date in the format yyyymmdd" << endl << endl;
+                cin >> birthdayholder;
+                cin.ignore();
+                cout << endl << endl;
+                
+                Person temporary(fnameholder, lnameholder, birthdayholder);
+                
+                bdaySearchTree.remove(temporary);
+                
+                cout << "Now enter the new details of the Person being modified" << endl << endl;
+                
+                cout << "Enter the first name" << endl << endl;
+                cin >> fnameholder;
+                cin.ignore();
+                cout << endl << endl;
+                
+                cout << "Enter the last name" << endl << endl;
+                cin >> lnameholder;
+                cin.ignore();
+                cout << endl << endl;
+                
+                cout << "Enter the birth date in the format yyyymmdd" << endl << endl;
+                cin >> birthdayholder;
+                cin.ignore();
+                cout << endl << endl;
+                
+                bdaySearchTree.insert(temporary);
+                
+                cout << temporary << " was modified!" << endl << endl;
+                
+            }
+            
             //Exit
-            else if (mainmenuchoice == 4)
+            else if (mainmenuchoice == 5)
             {
                 inloop = false;
             }
@@ -362,12 +457,13 @@ int main()
         cin.ignore();
         cout << endl << endl;
     } while (inloop == 'Y' || inloop == 'y');
-        
+    
+    //Postorder traversal print
     nameSearchTree.displayName(outfile1);
     cout << endl << endl;
     outfile1 << endl << endl;
-        
-    //This must be changed to breadth first traversal
+    
+    //Breadth-first traversal print
     bdaySearchTree.displayBday(outfile2);
     cout << endl << endl;
     outfile2 << endl << endl;
